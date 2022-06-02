@@ -4,7 +4,7 @@
 
 `Topic` 是用来存储生产者(`producer`)生产的消息事件，是由一个或多个 `partition` 组成的。
 
-![image-20220602104413408](./%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%88%86%E5%8C%BA.png)
+![image-20220602104413408](https://raw.githubusercontent.com/MasonEast/go-blog/master/kafka/%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%88%86%E5%8C%BA.png)
 
 `offset`是用来标记一个消费者在某个`partition`上读到了那一条消息。
 
@@ -14,7 +14,7 @@
 
 > tips: 这里的机器不一定指的是物理机器，多节点不一定要在不同的机器上
 
-![image-20220602104413408](./broker%E4%B8%8E%E9%9B%86%E7%BE%A4.png)
+![image-20220602104413408](https://raw.githubusercontent.com/MasonEast/go-blog/master/kafka/%E4%B8%BB%E9%A2%98%E4%B8%8E%E5%88%86%E5%8C%BA.png)
 
 每个 broker 都有一套冗余数据，称为 repliaction(副本)。
 
