@@ -33,36 +33,23 @@
 ### 配置 yml
 
 ```yml
-version: "3.7"
+version: "3.8"
 services:
   zookeeper:
+    container_name: zookeeper
     image: wurstmeister/zookeeper
-    container_name: zookeeper_apoint
-    restart: always
-    volumes:
-      - ./data:/data
     ports:
-      - 2181:2181
-
+      - "2181:2181"
   kafka:
+    container_name: kafka
     image: wurstmeister/kafka
-    container_name: kafka_apoint
-    restart: always
+    depends_on: [zookeeper]
     ports:
-      - 9092:9092
+      - "9092:9092"
     environment:
-      KAFKA_BROKER_ID: 0
-      #kafka会在zookeeper中使用这个参数进行注册，如果不设置，zk就无法向外提供broker的信息,这里填写kafka的ip地址
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.16.0.110:9092
-      KAFKA_CREATE_TOPICS: "test:2:0" #kafka启动后初始化一个有2个partition(分区)0个副本名叫test的topic
+      KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
+      KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      # kafka的tcp侦听ip地址 例如“127.0.0.1”，那么只有与该ip正确连接的客户端能成功连接到kafka；
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_HEAP_OPTS: "-Xmx256M -Xms128M"
-    volumes:
-      - ./kafka-logs:/kafka
-    depends_on:
-      - zookeeper
 ```
 
 通过`docker-compose up`启动。

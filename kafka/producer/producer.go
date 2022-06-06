@@ -48,7 +48,7 @@ func (p *Producer) SendMessage() {
 		fmt.Println("send message failed, err:", err)
 		return
 	}
-	fmt.Printf("ProducerId: %d, MessageId: %d, offset: %d, pid: %d", p.ProducerId, p.MessageId, offset, pid)
+	fmt.Printf("ProducerId: %d, MessageId: %d, offset: %d, pid: %d\n", p.ProducerId, p.MessageId, offset, pid)
 
 	p.MessageId++
 }

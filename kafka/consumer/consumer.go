@@ -35,7 +35,7 @@ func (c *Consumer) GetMessage(partitionId int32, offset int64) {
 	}
 	pc, err := c.Consumer.ConsumePartition(c.Topic, partitionId, offset)
 	if err != nil {
-		fmt.Printf("failed to start consumer for partition %d,err:%v", partitionId, err)
+		fmt.Printf("failed to start consumer for partition %d,err:%v\n", partitionId, err)
 		//That topic/partition is already being consumed
 		return
 	}
@@ -43,7 +43,7 @@ func (c *Consumer) GetMessage(partitionId int32, offset int64) {
 	// 异步从每个分区消费信息
 	go func(sarama.PartitionConsumer) {
 		for msg := range pc.Messages() {
-			fmt.Printf("ConsumerId:%d Partition:%d Offset:%d Key:%v Value:%v", c.ConsumerId, msg.Partition, msg.Offset, msg.Key, string(msg.Value))
+			fmt.Printf("ConsumerId:%d Partition:%d Offset:%d Key:%v Value:%v\n", c.ConsumerId, msg.Partition, msg.Offset, msg.Key, string(msg.Value))
 		}
 	}(pc)
 }
